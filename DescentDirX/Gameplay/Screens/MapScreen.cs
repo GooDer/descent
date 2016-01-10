@@ -46,7 +46,7 @@ namespace DescentDirX.Gameplay.Screens
             }
 
             widget.Draw(spriteBatch);
-            GameplayProgress.Instance.GetHeroeChooseDialog().Draw(spriteBatch);
+            GameplayProgress.Instance.GetChooseHeroDialog().Draw(spriteBatch);
 
             if (combatDialog != null)
             {
@@ -58,7 +58,7 @@ namespace DescentDirX.Gameplay.Screens
         {
             GameplayProgress.Instance.Scenario.Update(mouseX, mouseY);
             widget.Update(mouseX, mouseY);
-            GameplayProgress.Instance.GetHeroeChooseDialog().Update(mouseX, mouseY);
+            GameplayProgress.Instance.GetChooseHeroDialog().Update(mouseX, mouseY);
             if (combatDialog != null)
             {
                 combatDialog.Update(mouseX, mouseY);
@@ -172,7 +172,7 @@ namespace DescentDirX.Gameplay.Screens
                 if (actMonsterToPlace == null)
                 {
                     GameplayProgress.Instance.Scenario.NextStage();
-                    GameplayProgress.Instance.GetHeroeChooseDialog().Show();
+                    GameplayProgress.Instance.GetChooseHeroDialog().Show();
                 }
             }
 

@@ -84,7 +84,7 @@ namespace DescentDirX.Gameplay
             heroDialog.RegisterOnCharacterClick(OnHeroChoose);
         }
 
-        public ChooseHeroDialog GetHeroeChooseDialog()
+        public ChooseHeroDialog GetChooseHeroDialog()
         {
             return heroDialog;
         }

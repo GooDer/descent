@@ -17,7 +17,7 @@ namespace DescentDirX.Characters.Actions
 
         public bool PerformActionOn(Character character, Scenario scenario)
         {
-            GameplayProgress.Instance.GetHeroeChooseDialog().Show();
+            GameplayProgress.Instance.GetChooseHeroDialog().Show();
             return true;
         }
     }
