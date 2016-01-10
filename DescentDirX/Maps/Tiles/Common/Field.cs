@@ -9,7 +9,6 @@ using DescentDirX.Characters.Monsters;
 using DescentDirX.UI;
 using DescentDirX.BusEvents.GameProgress;
 using DescentDirX.Characters;
-using System.Collections.Generic;
 
 namespace DescentDirX.Maps.Tiles.Common
 {
@@ -17,14 +16,14 @@ namespace DescentDirX.Maps.Tiles.Common
     {
         public const int SIZE = 64;
 
-        public Rectangle Rect { get; private set; }
-        public Rectangle OriginRect { get; private set; }
+        public Rectangle Rect { get; set; }
+        public Rectangle OriginRect { get; set; }
         public TerrainEnum Terrain { get; set; }
 
-        public bool OpenLeft { get; private set; }
-        public bool OpenRight { get; private set; }
-        public bool OpenBottom { get; private set; }
-        public bool OpenTop { get; private set; }
+        public bool OpenLeft { get; set; }
+        public bool OpenRight { get; set; }
+        public bool OpenBottom { get; set; }
+        public bool OpenTop { get; set; }
 
         public Color MainColor { get; set; } = Color.Gray;
         private Color HighlightColor { get; set; } = Color.Green;
@@ -171,82 +170,7 @@ namespace DescentDirX.Maps.Tiles.Common
 
         public void Rotate(TileRotation rotation, int width, int height)
         {
-            var newVector = MapVector.GetInversedVector(new Vector2(Rect.X, Rect.Y), width, height, rotation);
-            var newX = (int)newVector.Value.X;
-            var newY = (int)newVector.Value.Y;
-
-            var tempOpenLeft = OpenLeft;
-            var tempOpenRight = OpenRight;
-            var tempOpenTop = OpenTop;
-            var tempOpenBottom = OpenBottom;
-
-            var tempTopField = TopField;
-            var tempBottomField = BottomField;
-            var tempLeftField = LeftField;
-            var tempRightField = RightField;
-            var tempTopRightField = TopRightField;
-            var tempTopLeftField = TopLeftField;
-            var tempBottomLeftField = BottomLeftField;
-            var tempBottomRightField = BottomRightField;
-
-            switch (rotation)
-            {
-                case TileRotation.DEGREE_90:
-                    newX -= Rect.Width;
-                    OpenLeft = tempOpenBottom;
-                    OpenRight = tempOpenTop;
-                    OpenTop = tempOpenLeft;
-                    OpenBottom = tempOpenRight;
-
-                    TopField = tempLeftField;
-                    BottomField = tempRightField;
-                    LeftField = tempBottomField;
-                    RightField = tempTopField;
-
-                    TopLeftField = tempBottomLeftField;
-                    TopRightField = tempTopLeftField;
-                    BottomRightField = tempTopRightField;
-                    BottomLeftField = tempBottomRightField;
-                    break;
-                case TileRotation.DEGREE_180:
-                    newX -= Rect.Width;
-                    newY -= Rect.Height;
-                    OpenLeft = tempOpenRight;
-                    OpenRight = tempOpenLeft;
-                    OpenTop = tempOpenBottom;
-                    OpenBottom = tempOpenTop;
-
-                    LeftField = tempRightField;
-                    RightField = tempLeftField;
-                    TopField = tempBottomField;
-                    BottomField = tempTopField;
-
-                    TopLeftField = tempBottomRightField;
-                    TopRightField = tempBottomLeftField;
-                    BottomRightField = tempTopLeftField;
-                    BottomLeftField = tempTopRightField;
-                    break;
-                case TileRotation.DEGREE_270:
-                    newY -= Rect.Height;
-                    OpenLeft = tempOpenTop;
-                    OpenRight = tempOpenBottom;
-                    OpenTop = tempOpenRight;
-                    OpenBottom = tempOpenLeft;
-
-                    LeftField = tempTopField;
-                    RightField = tempBottomField;
-                    TopField = tempRightField;
-                    BottomField = tempLeftField;
-
-                    TopLeftField = tempTopRightField;
-                    TopRightField = tempBottomRightField;
-                    BottomRightField = tempBottomLeftField;
-                    BottomLeftField = tempTopLeftField;
-                    break;
-            }
-
-            Rect = new Rectangle(newX, newY, Rect.Width, Rect.Height);
-            OriginRect = Rect;
+            FieldHelper.RotateField(this, rotation, width, height);
         }
 
         public bool IsFocused()
