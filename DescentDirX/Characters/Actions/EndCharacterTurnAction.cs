@@ -18,6 +18,7 @@ namespace DescentDirX.Characters.Actions
         public bool PerformActionOn(Character character, Scenario scenario)
         {
             GameplayProgress.Instance.GetChooseHeroDialog().Show();
+            GameplayProgress.Instance.Scenario.ClearMarkedFields();
             return true;
         }
     }
