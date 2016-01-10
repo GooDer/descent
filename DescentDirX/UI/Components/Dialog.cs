@@ -103,5 +103,10 @@ namespace DescentDirX.UI.Components
                 rendable.Hide();
             }
         }
+
+        protected IList<GameObject> GetRendables()
+        {
+            return rendableList.Values;
+        }
     }
 }

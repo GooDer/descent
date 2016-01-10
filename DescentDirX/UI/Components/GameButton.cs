@@ -14,7 +14,7 @@ namespace DescentDirX.UI.Components
         private bool Focused { get; set; } = false;
         private bool LastFocusState { get; set; } = false;
 
-        public bool Disabled { get; set; } = false;
+        private bool disabled = false;
 
         private OnClick ClickCallback { get; set; }
         private OnFocus FocusCallback { get; set; }
@@ -74,7 +74,7 @@ namespace DescentDirX.UI.Components
 
         private bool CanTriggerClick()
         {
-            return Focused && ClickCallback != null && Disabled != true && IsVisible() == true;
+            return Focused && ClickCallback != null && !IsDisabled() && IsVisible();
         }
 
         public void RegisterOnClick(OnClick callback)
@@ -113,6 +113,16 @@ namespace DescentDirX.UI.Components
             if (IsVisible()) return;
             base.Show();
             MainGame.EVENT_BUS.Register(this);
+        }
+
+        public virtual void SetDisabled(bool disabled)
+        {
+            this.disabled = disabled;
+        }
+
+        public bool IsDisabled()
+        {
+            return disabled;
         }
     }
 }

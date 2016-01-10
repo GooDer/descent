@@ -14,8 +14,8 @@ namespace DescentDirX.UI
             GameButton ThreePlayersButton = new TextGameButton(new Vector2(300, 25), new Vector2(GameCamera.GetScreenWidth() / 2 - 150, 450), "3 Heroes");
             GameButton FourPlayersButton = new TextGameButton(new Vector2(300, 25), new Vector2(GameCamera.GetScreenWidth() / 2 - 150, 500), "4 Heroes");
 
-            ThreePlayersButton.Disabled = true;
-            FourPlayersButton.Disabled = true;
+            ThreePlayersButton.SetDisabled(true);
+            FourPlayersButton.SetDisabled(true);
 
             AddButton(TwoPlayersButton);
             AddButton(ThreePlayersButton);

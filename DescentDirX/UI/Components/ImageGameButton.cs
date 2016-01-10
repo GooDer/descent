@@ -15,11 +15,6 @@ namespace DescentDirX.UI.Components
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (!IsVisible()) return;
-
-            if (Disabled)
-            {
-                Image.GrayScale = true;
-            }
             Image.Draw(spriteBatch);
         }
 
@@ -39,6 +34,12 @@ namespace DescentDirX.UI.Components
         {
             base.Hide();
             Image.Hide();
+        }
+
+        public override void SetDisabled(bool disabled)
+        {
+            base.SetDisabled(disabled);
+            Image.GrayScale = disabled;
         }
     }
 }

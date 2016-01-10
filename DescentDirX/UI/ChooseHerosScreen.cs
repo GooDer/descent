@@ -100,7 +100,7 @@ namespace DescentDirX.UI
 
         private void OnHeroChoose(GameButton source, object hero)
         {
-            source.Disabled = true;
+            source.SetDisabled(true);
             heroes.Add((Hero)hero);
             actualHero = (Hero)hero;
             subScreen = SubScreen.CLASS_SCREEN;
@@ -110,7 +110,7 @@ namespace DescentDirX.UI
 
         private void OnClassChoose(GameButton source, object heroClass)
         {
-            source.Disabled = true;
+            source.SetDisabled(true);
             actualHero.SetHeroClass((IHeroClass)heroClass);
 
             if (heroes.Count == NumOfHeroes)

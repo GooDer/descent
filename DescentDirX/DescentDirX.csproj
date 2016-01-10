@@ -130,6 +130,7 @@
     <Compile Include="Items\Weapons\Common\IWeapon.cs" />
     <Compile Include="Maps\FieldHelper.cs" />
     <Compile Include="Maps\PathHelper.cs" />
+    <Compile Include="Screens\Components\ChooseHeroDialog.cs" />
     <Compile Include="UI\Components\Label.cs" />
     <Compile Include="Gameplay\GameplayProgress.cs" />
     <Compile Include="Gameplay\GameStateEnum.cs" />

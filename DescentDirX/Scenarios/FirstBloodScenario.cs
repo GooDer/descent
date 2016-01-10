@@ -80,7 +80,7 @@ namespace DescentDirX.Scenarios
 
             foreach (var monster in monsterGroup.GetMonsters())
             {
-                UnplacedMonsters.Add(monster);
+                ScenarioMonsters.Add(monster);
             }
             FirstGroupPrepared = true;
         }
@@ -92,7 +92,7 @@ namespace DescentDirX.Scenarios
 
             foreach (var monster in monsterGroup.GetMonsters())
             {
-                UnplacedMonsters.Add(monster);
+                ScenarioMonsters.Add(monster);
             }
             SecondGroupPrepared = true;
         }

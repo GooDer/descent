@@ -3,8 +3,8 @@ using DescentDirX.Characters;
 using DescentDirX.Characters.Heroes;
 using DescentDirX.Characters.Monsters;
 using DescentDirX.Scenarios;
+using DescentDirX.Screens.Components;
 using DescentDirX.UI.Components;
-using Microsoft.Xna.Framework;
 using NGuava;
 using System.Collections.Generic;
 using System.Text;
@@ -33,8 +33,9 @@ namespace DescentDirX.Gameplay
 
         private static int turn = 1;
 
-        private List<Hero> heroes { get; set; }
-        public List<Monster> Monsters { get; private set; }
+        private List<Hero> heroes;
+
+        public List<Monster> Monsters { get; set; }
 
         private Character actualCharacter;
         public Character ActCharacter {
@@ -50,7 +51,7 @@ namespace DescentDirX.Gameplay
 
         public Scenario Scenario { get; set; }
 
-        private Dialog dialog = new Dialog(700, 500, "Choose next hero");
+        private ChooseHeroDialog heroDialog;
 
         private GameplayProgress()
         {
@@ -79,30 +80,20 @@ namespace DescentDirX.Gameplay
         public void SetHeroes(List<Hero> heroes)
         {
             this.heroes = heroes;
-
-            int i = 0;
-            foreach (var hero in this.heroes)
-            {
-                var image = new ScaledImage(new Vector2(50 + 50 * i, 50), hero.GetImage(), 0.35f);
-                image.AlterPositionX(image.GetWidth() * i);
-                ImageGameButton button = new ImageGameButton(image);
-                button.RegisterOnClick(this.OnHeroChoose);
-                button.RegisterCallbackObject(hero);
-                dialog.AddRendable(i, button);
-                i++;
-            }
+            heroDialog = new ChooseHeroDialog(700, 500, heroes);
+            heroDialog.RegisterOnCharacterClick(OnHeroChoose);
         }
 
-        public Dialog GetHeroeChooseDialog()
+        public ChooseHeroDialog GetHeroeChooseDialog()
         {
-            return dialog;
+            return heroDialog;
         }
 
         private void OnHeroChoose(GameButton source, object hero)
         {
-            source.Disabled = true;
+            source.SetDisabled(true);
             var actHero = hero as Hero;
-            dialog.Hide();
+            heroDialog.Hide();
             actHero.Upkeep();
             ActCharacter = actHero;
         }

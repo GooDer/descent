@@ -33,14 +33,14 @@ namespace DescentDirX.Scenarios
 
         public ScenarioStageEnum Stage { get; private set; } = ScenarioStageEnum.HERO_SETUP;
 
-        protected List<Monster> UnplacedMonsters { get; set; }
+        public List<Monster> ScenarioMonsters { get; protected set; }
 
         public Scenario(string name)
         {
             tiles = new Dictionary<string, Tile>();
             fieldGrid = new Dictionary<Position, Field>();
             Name = name;
-            UnplacedMonsters = new List<Monster>();
+            ScenarioMonsters = new List<Monster>();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -127,6 +127,7 @@ namespace DescentDirX.Scenarios
                     MarkFields();
                     break;
                 case ScenarioStageEnum.OVERLORD_SETUP:
+                    GameplayProgress.Instance.Monsters = ScenarioMonsters;
                     Stage = ScenarioStageEnum.HERO_TURN;
                     break;
                 case ScenarioStageEnum.HERO_TURN:
@@ -147,7 +148,7 @@ namespace DescentDirX.Scenarios
         {
             if (!HasUnplacedMonster()) return null;
 
-            foreach (var monster in UnplacedMonsters)
+            foreach (var monster in ScenarioMonsters)
             {
                 if (monster.Position == null)
                 {
@@ -160,7 +161,7 @@ namespace DescentDirX.Scenarios
 
         public bool HasUnplacedMonster()
         {
-            foreach (var monster in UnplacedMonsters)
+            foreach (var monster in ScenarioMonsters)
             {
                 if (monster.Position == null)
                 {
